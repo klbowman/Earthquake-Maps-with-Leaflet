@@ -1,17 +1,6 @@
 // URL for all earthquakes, past 30 days 
 var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson"; 
 
-// Create map.
- var myMap = L.map("map", {
-  center: [37.09, -95.71],
-  zoom: 5,
-});
-
-// Create the base layers.
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(myMap);
-
 // Perform a GET request to the URL
 d3.json(url).then(function (data) {
   console.log(data);
@@ -27,7 +16,7 @@ d3.json(url).then(function (data) {
     weight: 0.5
   };
 
-}
+
   // Function to determine marker color
   function Markercolor(depth) {
     var color = ""
@@ -56,21 +45,81 @@ d3.json(url).then(function (data) {
     return mag * 1.5;
   } 
 
+}
+
+ // Create markers, define markers as variable
+
+var earthquakeMarkers = L.geoJSON( data, {
+  style: styleInfo,
+  pointToLayer: function (feature, latlng) {
+    return L.circleMarker(latlng).bindPopup(`<h3>${feature.properties.place}</h3><hr><p>${new Date(feature.properties.time)}</p><p>Magnitude: ${feature.properties.mag}</p><p>Depth: ${feature.geometry.coordinates[2]}</p>`)
+  }
+});
 
 
-  // Create markers
+// URL for plate tectonic boundaries
+var boundaries_url = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json"; 
 
-  L.geoJSON(data, {
-    pointToLayer: function (feature, latlng) {
-        return L.circleMarker(latlng);
-    },
+// Retrieve plate boundary data from url
 
-    // Marker style & popup
-    style: styleInfo,
-    onEachFeature: function(feature,layer) {
-      layer.bindPopup(`<h3>${feature.properties.place}</h3><hr><p>${new Date(feature.properties.time)}</p><p>Magnitude: ${feature.properties.mag}</p><p>Depth: ${feature.geometry.coordinates[2]}</p>`);
-    }
-}).addTo(myMap);
+d3.json(boundaries_url).then(function(data) {
+  var boundaries = L.geoJson(data, {
+    color: "yellow",
+    weight: 2
+  })
+
+
+    // Create the base layers.
+// MAP LAYERS
+
+// Satellite layer
+var googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+    maxZoom: 20,
+    subdomains:['mt0','mt1','mt2','mt3']
+});
+
+// Grayscale layer
+var grayscale = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
+	maxZoom: 20,
+	attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+});
+
+
+
+// Topographic
+var topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+  });
+
+
+// Create map, add tile layers and marker layer 
+var myMap = L.map("map", {
+  center: [37.09, -95.71],
+  zoom: 5,
+  layers: [earthquakeMarkers, boundaries, googleSat]
+});
+
+// Create a baseMaps object
+var baseMaps = {
+  "Sattelite": googleSat,
+  "Grayscale": grayscale,
+  "Terrain": topo
+};
+
+// Create an overlay object for earthquake markers and plate boundaries
+var overlayMaps = {
+  Earthquakes: earthquakeMarkers,
+  Tectonics: boundaries
+}
+
+
+// Create a layer control.
+  // Pass it our baseMaps and overlayMaps.
+  // Add the layer control to the map.
+  L.control.layers(baseMaps, overlayMaps, {
+    collapsed: false
+  }).addTo(myMap);
+
 
 // Create legend 
 
@@ -96,5 +145,5 @@ legend.onAdd = function () {
 
 legend.addTo(myMap);
   
-
+});
 });

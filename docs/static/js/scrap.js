@@ -3,39 +3,60 @@ var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.g
 
 
 // MAP LAYERS
-var street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+
+// Satellite layer
+var googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+    maxZoom: 20,
+    subdomains:['mt0','mt1','mt2','mt3']
 });
 
-// Add grayscale and outdoors layers
-  // grayscale
+
+
+  // Grayscale layer
 var grayscale = L.tileLayer('https://maps.omniscale.net/v2/{id}/style.grayscale/{z}/{x}/{y}.png', {
 attribution: '&copy; 2021 &middot; <a href="https://maps.omniscale.com/">Omniscale</a> ' +
 '&middot; Map data: <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 });
+
   // Topographic
 var topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
     attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
   });
 
-// Create map.
+
+// Create a baseMaps object
+var baseMaps = {
+  "Satellite": googleSat,
+  "Grayscale": grayscale,
+  "Outdoors": topo
+};
+
+// Create layer groups
+
+// let earthquakes = new L.LayerGroup();
+// let boundaries = new L.LayerGroup();
+
+// Define overlays 
+var overlayMaps = {
+  Earthquakes: earthquakes,
+  Tectonic_Plates: boundaries,
+};
+
+// Create map
 var myMap = L.map("map", {
   center: [37.09, -95.71],
   zoom: 5,
-  layers: [street, grayscale,topo]
-})
+  layers: [googleSat, grayscale, topo]
+});
 
-// Create the base layers.
-var baseMaps = {
-  "streets": streets,
-  "grayscale": grayscale,
-  "topo": topo
-};
+// Create a layer control, pass in baseMaps and overlayMaps, add layer control to map
+L.control.layers(baseMaps, overlayMaps, {
+  collapsed: false
+}).addTo(myMap);
 
 
-// Create an earthquake layer with existing map functions
 
-let earthquakes = new L.LayerGroup();
+
 
 // Perform a GET request to the URL
 d3.json(url).then(function (data) {
@@ -83,7 +104,7 @@ d3.json(url).then(function (data) {
 
   // Create markers
 
-  L.geoJSON(data, {
+  var earthquakes = L.geoJSON(data, {
     pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng);
     },
@@ -94,44 +115,27 @@ d3.json(url).then(function (data) {
       layer.bindPopup(`<h3>${feature.properties.place}</h3><hr><p>${new Date(feature.properties.time)}</p><p>Magnitude: ${feature.properties.mag}</p><p>Depth: ${feature.geometry.coordinates[2]}</p>`);
     }
     // add earthquake markers to earthquakes layer instaed of map
-}).addTo(earthquakes);
+}).addTo(myMap);
 
 
 
 
 
-// Create a layer for tectonic boundaries
 
-let boundaries = new L.LayerGroup();
+
+
 
 // URL for plate tectonic boundaries
 var boundaries_url = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json"; 
 
 // Retrieve data from url
 
-let lineStyle = {
-  color: "#ffffb2",
-  weight: 2
-}
-
 d3.json(boundaries_url).then(function(data) {
-  L.geoJson(data, {
-    style: lineStyle
-  }).addTo(boundaries);
+  var boundaries = L.geoJson(data, {
+    color: "yellow",
+    weight: 2
+  }).addTo(myMap);
 });
-
-// Define overlays 
-var overlayMaps = {
-  Earthquakes: earthquakes,
-  Tectonic_Plates: boundaries,
-};
-
-L.control.layers(baseMaps, overlayMaps, {
-  collapsed: false
-}).addTo(myMap);
-
-
-
 
 
 // Create legend 
