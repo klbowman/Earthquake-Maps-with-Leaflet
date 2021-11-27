@@ -82,7 +82,7 @@ legend.onAdd = function () {
         grades = [-10, 10, 30, 50, 70],
         labels = ["#ffffb2", "#fecc5c", "#fd8d3c", "#f03b20","#bd0026"];
 
-        div.innerHTML += '<b>Earthquake Depth</b><br>' 
+        div.innerHTML += '<b>Earthquake Depth (km)</b><br>' 
 
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
