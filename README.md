@@ -1,10 +1,14 @@
 # Earthquake Data Visualizations with Leaflet 
 
-Interactive maps that visualize global earthquake data.
+Interactive maps that visualize global earthquake data. View the final product [here] (https://klbowman.github.io/leaflet-challenge/).
 
 ## Description
 
-This repository creates two interactive maps of earthquake occurrences across the globe, using data from the [United States Geological Survey] (https://www.usgs.gov/). The first map shows the location of each earthquake recorded during the past 30 
+This repository uses Leaflet to create two interactive maps of earthquake occurrences across the globe, using GeoJSON data from the [United States Geological Survey] (https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php). 
+
+The first map shows the location of all earthquakes recorded during the past 30 days on an OpenStreetMap tile layer. Data marker size corresponds to earthquake magnitude and color corresponds to the depth where the earthquake began to rupture. Data marker popups include a description of the earthquake location, date and time of occurrence, magnitude, and depth (kilometers). 
+
+The second map shows the location of all earthquakes recorded during the past 30 days, and the location of tectonic plate boundaries, with three tile layer options. Earthquake data markers and popup information is the same as the first map. Layer control is used to toggle between three map layers (Satellite, Grayscale, Outdoors) and two datasets (Tectonic Plates, Earthquakes).
 
 ## Getting Started
 
@@ -18,24 +22,13 @@ This repository creates two interactive maps of earthquake occurrences across th
 ### Installing
 
 * Clone this repository to your desktop.
-* For the simple map, navitage to the Leaflet-Step-1 directory and open index.html in your browser.
-* For the layerd map, navigate to the top level of the directory and open index.html in your browser.
+* For the simple map (Earthquake Map 1), navitage to the Leaflet-Step-1 directory and open index.html in your browser.
+* For the layerd map (Earthquake Map 2), navigate to the top level of the directory and open index.html in your browser.
 
 ### Data Sources
 
 * United States Geological Survey. (2021). All Earthquakes, Past 30 Days. Retrived from [https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php] (https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php)
-* Format: GeoJSON 
-* Other options/links...
-```
-code blocks for commands
-```
-
-## Help
-
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
+* Ahlenius, H., Bird, Peter. (2014). World tectonic plates and boundaries. Retrived from [https://github.com/fraxen/tectonicplates] (https://github.com/fraxen/tectonicplates)
 
 ## Authors
 
@@ -44,23 +37,3 @@ Contributors names and contact info
 ex. Dominique Pizzie  
 ex. [@DomPizzie](https://twitter.com/dompizzie)
 
-## Version History
-
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
-
-## License
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
-
-## Acknowledgments
-
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
