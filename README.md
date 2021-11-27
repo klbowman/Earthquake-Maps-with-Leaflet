@@ -29,8 +29,8 @@ The second map shows the location of all earthquakes recorded during the past 30
 
 ### Data Sources
 
-* United States Geological Survey. (2021). All Earthquakes, Past 30 Days. Retrived from [https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php] (https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php)
-* Ahlenius, H., Bird, Peter. (2014). World tectonic plates and boundaries. Retrived from [https://github.com/fraxen/tectonicplates] (https://github.com/fraxen/tectonicplates)
+* United States Geological Survey. (2021). All Earthquakes, Past 30 Days. Retrived from [https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php)
+* Ahlenius, H., Bird, Peter. (2014). World tectonic plates and boundaries. Retrived from [https://github.com/fraxen/tectonicplates](https://github.com/fraxen/tectonicplates)
 
 ## Authors
 
@@ -38,5 +38,5 @@ Katlin Bowman, PhD
 
 E: klbowman@ucsc.edu
 
-https://www.linkedin.com/in/katlin-bowman/
+[LinkedIn](https://www.linkedin.com/in/katlin-bowman/)
 
