@@ -1,6 +1,6 @@
 # Earthquake Data Visualizations with Leaflet 
 
-Interactive maps that visualize global earthquake data. View the final product [here] (https://klbowman.github.io/leaflet-challenge/).
+Interactive maps that visualize global earthquake data. View the final product [here](https://klbowman.github.io/leaflet-challenge/).
 
 ## Description
 
