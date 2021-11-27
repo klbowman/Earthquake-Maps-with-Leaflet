@@ -52,7 +52,7 @@ d3.json(url).then(function (data) {
 var earthquakeMarkers = L.geoJSON( data, {
   style: styleInfo,
   pointToLayer: function (feature, latlng) {
-    return L.circleMarker(latlng).bindPopup(`<h3>${feature.properties.place}</h3><hr><p>${new Date(feature.properties.time)}</p><p>Magnitude: ${feature.properties.mag}</p><p>Depth: ${feature.geometry.coordinates[2]}</p>`)
+    return L.circleMarker(latlng).bindPopup(`<h3>${feature.properties.place}</h3><hr><p>${new Date(feature.properties.time)}</p><p>Magnitude: ${feature.properties.mag}</p><p>Depth: ${feature.geometry.coordinates[2]}km</p>`)
   }
 });
 
