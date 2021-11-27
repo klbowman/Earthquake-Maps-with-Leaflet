@@ -1,10 +1,10 @@
 # Earthquake Data Visualizations with Leaflet 
 
-Create interactive maps to visualize global earthquake data.
+Interactive maps that visualize global earthquake data.
 
 ## Description
 
-This repository creates two interactive maps of earthquake occurances across the globe.
+This repository creates two interactive maps of earthquake occurrences across the globe, using data from the [United States Geological Survey] (https://www.usgs.gov/). The first map shows the location of each earthquake recorded during the past 30 
 
 ## Getting Started
 
@@ -18,14 +18,14 @@ This repository creates two interactive maps of earthquake occurances across the
 ### Installing
 
 * Clone this repository to your desktop.
-* Navigate to the top level of the directory.
-* Open index.html in your browser.
+* For the simple map, navitage to the Leaflet-Step-1 directory and open index.html in your browser.
+* For the layerd map, navigate to the top level of the directory and open index.html in your browser.
 
 ### Data Sources
 
-* United States Geological Survey. (Accessed 23 Nov. 2021). All Earthquakes, Past 30 Days. Retrived from [https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php] (https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php)
+* United States Geological Survey. (2021). All Earthquakes, Past 30 Days. Retrived from [https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php] (https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php)
 * Format: GeoJSON 
-* 
+* Other options/links...
 ```
 code blocks for commands
 ```
