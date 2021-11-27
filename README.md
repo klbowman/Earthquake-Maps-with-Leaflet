@@ -37,6 +37,8 @@ The second map shows the location of all earthquakes recorded during the past 30
 ## Authors
 
 Katlin Bowman, PhD
+
 E: klbowman@ucsc.edu
+
 https://www.linkedin.com/in/katlin-bowman/
 
